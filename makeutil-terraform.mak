@@ -1,15 +1,11 @@
 # terraform command
 TERRAFORM?=terraform
 
-ifndef stack
-stack:=$(shell $(TERRAFORM) workspace show)
-endif
-
 # configuartion files for terraform
-VARFILES?=-var-file=$(stack).tfvars
+VARFILES?=-var-file=variables.tfvars
 
 info:
-	@echo :: using workspace $(stack)
+	@echo :: using workspace $(shell $(TERRAFORM) workspace show)
 	@echo :: $(shell $(TERRAFORM) version)
 
 init:
